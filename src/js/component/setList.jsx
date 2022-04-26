@@ -2,28 +2,27 @@ import React, { useState } from "react";
 import AudioPlayer from "./audioPlayer.jsx";
 
 const SetList = () => {
+	const soundUrl = "https://assets.breatheco.de/apis/sound/";
 	const [sounds] = useState([
 		{
 			id: 1,
 			category: "game",
 			name: "Mario Castle",
-			url: "files/mario/songs/castle.mp3",
+			url: soundUrl + "files/mario/songs/castle.mp3",
 		},
 		{
 			id: 2,
 			category: "game",
 			name: "Mario Star",
-			url: "files/mario/songs/hurry-starman.mp3",
+			url: soundUrl + "files/mario/songs/hurry-starman.mp3",
 		},
 		{
 			id: 3,
 			category: "game",
 			name: "Mario Overworld",
-			url: "files/mario/songs/overworld.mp3",
+			url: soundUrl + "files/mario/songs/overworld.mp3",
 		},
 	]);
-
-	const soundUrl = "https://assets.breatheco.de/apis/sound/";
 
 	const [currentSound, setCurrentSound] = useState("");
 
@@ -51,8 +50,11 @@ const SetList = () => {
 				}}>
 				{sounds[2].id} - {sounds[2].name}
 			</div>
-
-			<AudioPlayer src={soundUrl + currentSound} />
+			{currentSound != "" ? (
+				<AudioPlayer src={currentSound} list={sounds} />
+			) : (
+				""
+			)}
 		</div>
 	);
 };

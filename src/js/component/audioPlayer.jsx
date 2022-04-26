@@ -1,13 +1,40 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 
 const AudioPlayer = (props) => {
-	console.log(props.src);
+	const [list] = useState(props.list);
+	const [playFlag, setplayFlag] = useState(false);
+
+	const audioControl = useRef();
+
+	function playSound() {
+		return (
+			<button
+				onClick={() => {
+					audioControl.current.play();
+					setplayFlag(true);
+				}}>
+				Play
+			</button>
+		);
+	}
+	function pauseSound() {
+		return (
+			<button
+				onClick={() => {
+					audioControl.current.pause();
+					setplayFlag(false);
+				}}>
+				Pause
+			</button>
+		);
+	}
+
+	console.log(list);
 	return (
-		<div className="container-fluid">
-			<audio src={props.src} controls>
-				Your browser does not support the audio element.
-			</audio>
-		</div>
+		<>
+			<audio src={props.src} ref={audioControl}></audio>
+			{!playFlag ? playSound() : pauseSound()}
+		</>
 	);
 };
 
