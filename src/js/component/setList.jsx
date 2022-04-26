@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import AudioPlayer from "./audioPlayer.jsx";
 
 const SetList = () => {
-	let sounds = [
+	const [sounds] = useState([
 		{
 			id: 1,
 			category: "game",
@@ -21,7 +21,7 @@ const SetList = () => {
 			name: "Mario Overworld",
 			url: "files/mario/songs/overworld.mp3",
 		},
-	];
+	]);
 
 	const soundUrl = "https://assets.breatheco.de/apis/sound/";
 

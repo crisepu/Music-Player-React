@@ -1,5 +1,4 @@
 import React from "react";
-import SetList from "./setList.jsx";
 
 const AudioPlayer = (props) => {
 	console.log(props.src);
