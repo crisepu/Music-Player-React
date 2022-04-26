@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import AudioPlayer from "./audioPlayer.jsx";
 
 const SetList = () => {
 	let sounds = [
@@ -24,18 +25,34 @@ const SetList = () => {
 
 	const soundUrl = "https://assets.breatheco.de/apis/sound/";
 
+	const [currentSound, setCurrentSound] = useState("");
+
 	return (
 		<div className="generalList">
 			<div className="col header"></div>
-			<div className="col list">
+			<div
+				className="col list"
+				onClick={() => {
+					setCurrentSound(sounds[0].url);
+				}}>
 				{sounds[0].id} - {sounds[0].name}
 			</div>
-			<div className="col list">
+			<div
+				className="col list"
+				onClick={() => {
+					setCurrentSound(sounds[1].url);
+				}}>
 				{sounds[1].id} - {sounds[1].name}
 			</div>
-			<div className="col list">
+			<div
+				className="col list"
+				onClick={() => {
+					setCurrentSound(sounds[2].url);
+				}}>
 				{sounds[2].id} - {sounds[2].name}
 			</div>
+
+			<AudioPlayer src={soundUrl + currentSound} />
 		</div>
 	);
 };

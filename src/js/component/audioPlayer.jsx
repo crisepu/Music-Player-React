@@ -1,13 +1,11 @@
 import React from "react";
+import SetList from "./setList.jsx";
 
-//create your first component
-const AudioPlayer = () => {
+const AudioPlayer = (props) => {
+	console.log(props.src);
 	return (
 		<div className="container-fluid">
-			<audio controls>
-				<source
-					src="https://assets.breatheco.de/apis/sound/files/mario/songs/castle.mp3"
-					type="audio/mp3"></source>
+			<audio src={props.src} controls>
 				Your browser does not support the audio element.
 			</audio>
 		</div>
