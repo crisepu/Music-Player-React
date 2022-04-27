@@ -1,5 +1,6 @@
 import React, { useState, useRef } from "react";
 import SetList from "./setList.jsx";
+import Controls from "./controls.jsx";
 
 const AudioPlayer = () => {
 	const [songs] = useState([
@@ -23,17 +24,18 @@ const AudioPlayer = () => {
 		},
 	]);
 	const [playFlag, setplayFlag] = useState(false);
-	const [currentSong, setCurrentSong] = useState(0);
+	const [currentSong, setCurrentSong] = useState(null);
 	const songUrl =
-		"https://assets.breatheco.de/apis/sound/" + songs[currentSong].url;
-
+		currentSong != null
+			? "https://assets.breatheco.de/apis/sound/" + songs[currentSong].url
+			: "";
 	const audioControl = useRef();
 
-	const playSound = () => {
+	const playSong = () => {
 		audioControl.current.play();
 		setplayFlag(true);
 	};
-	const pauseSound = () => {
+	const pauseSong = () => {
 		audioControl.current.pause();
 		setplayFlag(false);
 	};
@@ -51,11 +53,28 @@ const AudioPlayer = () => {
 		<>
 			<div className="generalPlayer">
 				<div className="col header"></div>
-				<audio src={songUrl} ref={audioControl}></audio>
+				<audio src={songUrl} ref={audioControl} autoPlay></audio>
 				<SetList
 					songs={songs}
 					setCurrentSong={(index) => {
 						setCurrentSong(index);
+						setplayFlag(true);
+					}}
+					setplayFlag={() => setplayFlag(true)}
+				/>
+				<Controls
+					playFlag={playFlag}
+					playSong={() => {
+						playSong();
+					}}
+					pauseSong={() => {
+						pauseSong();
+					}}
+					previousSong={() => {
+						previousSong();
+					}}
+					nextSong={() => {
+						nextSong();
 					}}
 				/>
 			</div>
